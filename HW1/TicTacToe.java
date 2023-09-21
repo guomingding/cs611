@@ -20,24 +20,23 @@ public class TicTacToe extends GameManager {
         }
 
         // Check diagonals
-        if (checkDiagonal(boardTemp)) {
+        if (checkDiagTopLeftBottomRight(boardTemp)) {
             return boardTemp[0]; // Diagonal (top-left to bottom-right) win
         }
-        if (checkReverseDiagonal(boardTemp)) {
+        if (checkDiagTopRightBottomLeft(boardTemp)) {
             return boardTemp[size - 1]; // Diagonal (top-right to bottom-left) win
         }
-
-        // No win yet
         return ' ';
     }
 
     private boolean checkRow(char[] boardTemp, int row) {
-        char currRow = boardTemp[row * size];
-        if (currRow == ' ') {
+        char currCell = boardTemp[row * size];
+        if (currCell == ' ') {
             return false;
         }
+
         for (int col = 1; col < size; col++) {
-            if (boardTemp[row * size + col] != currRow) {
+            if (boardTemp[row * size + col] != currCell) {
                 return false;
             }
         }
@@ -45,43 +44,41 @@ public class TicTacToe extends GameManager {
     }
 
     private boolean checkColumn(char[] boardTemp, int col) {
-        char currCol = boardTemp[col];
-        if (currCol == ' ') {
+        char currCell = boardTemp[col];
+        if (currCell == ' ') {
             return false;
         }
         for (int row = 1; row < size; row++) {
-            if (boardTemp[row * size + col] != currCol) {
+            if (boardTemp[row * size + col] != currCell) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean checkDiagonal(char[] boardTemp) {
-        char firstCell = boardTemp[0];
-        if (firstCell == ' ') {
+    private boolean checkDiagTopLeftBottomRight(char[] boardTemp) {
+        char currCell = boardTemp[0];
+        if (currCell == ' ') {
             return false; // The diagonal is empty, no win possible
         }
         for (int i = 1; i < size; i++) {
-            if (boardTemp[i * size + i] != firstCell) {
+            if (boardTemp[i * size + i] != currCell) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean checkReverseDiagonal(char[] boardTemp) {
-        char firstCell = boardTemp[size - 1];
-        if (firstCell == ' ') {
+    private boolean checkDiagTopRightBottomLeft(char[] boardTemp) {
+        char currCell = boardTemp[size - 1];
+        if (currCell == ' ') {
             return false; // The reverse diagonal is empty, no win possible
         }
         for (int i = 1; i < size; i++) {
-            if (boardTemp[i * size + (size - 1 - i)] != firstCell) {
+            if (boardTemp[i * size + (size - 1 - i)] != currCell) {
                 return false;
             }
         }
         return true;
     }
-
-
 }

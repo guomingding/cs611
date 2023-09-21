@@ -1,15 +1,15 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class GameSelect {
     public static int chooseGame() {
         //prompt out welcome message and game menu.
-        Scanner kb = new Scanner(System.in);
+        //Scanner kb = new Scanner(System.in);
         int choice;
 
         welcomePrintOut();
         while (true) {
-            if (kb.hasNextInt()) {
-                choice = kb.nextInt();
+            if (GameInit.kb.hasNextInt()) {
+                choice = GameInit.kb.nextInt();
                 if (choice == 1 || choice == 2 || choice == 3) {
                     break;
                 } else {
@@ -21,7 +21,7 @@ public class GameSelect {
                 Board.clearScreen();
                 System.out.println("Invalid choice. Please select again.");
                 welcomePrintOut();
-                kb.next();
+                GameInit.kb.next();
             }
         }
         return choice; 

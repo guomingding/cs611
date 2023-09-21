@@ -1,5 +1,5 @@
 public class OrderAndChaos extends GameManager {
-    private static final int WINNING_PATTERN_LENGTH = 5; // Define the winning pattern length
+    private static final int WIN_CONDITION = 5; // Define the winning pattern length
     public OrderAndChaos(Board board) {
         super(board);
     }
@@ -44,7 +44,7 @@ public class OrderAndChaos extends GameManager {
         for (int col = 0; col < size; col++) {
             if (boardTemp[row * size + col] == player) {
                 consecutiveCount++;
-                if (consecutiveCount == WINNING_PATTERN_LENGTH) {
+                if (consecutiveCount == WIN_CONDITION) {
                     return true;
                 }
             } else {
@@ -60,7 +60,7 @@ public class OrderAndChaos extends GameManager {
         for (int row = 0; row < size; row++) {
             if (boardTemp[row * size + col] == player) {
                 consecutiveCount++;
-                if (consecutiveCount == WINNING_PATTERN_LENGTH) {
+                if (consecutiveCount == WIN_CONDITION) {
                     return true;
                 }
             } else {
@@ -72,10 +72,10 @@ public class OrderAndChaos extends GameManager {
 
     private boolean checkDiagonal(char[] boardTemp, char player) {
         // Check top-left to bottom-right diagonal
-        for (int i = 0; i <= size - WINNING_PATTERN_LENGTH; i++) {
-            for (int j = 0; j <= size - WINNING_PATTERN_LENGTH; j++) {
+        for (int i = 0; i <= size - WIN_CONDITION; i++) {
+            for (int j = 0; j <= size - WIN_CONDITION; j++) {
                 boolean diagonalWin = true;
-                for (int k = 0; k < WINNING_PATTERN_LENGTH; k++) {
+                for (int k = 0; k < WIN_CONDITION; k++) {
                     if (boardTemp[(i + k) * size + (j + k)] != player) {
                         diagonalWin = false;
                         break;
@@ -88,10 +88,10 @@ public class OrderAndChaos extends GameManager {
         }
 
         // Check top-right to bottom-left diagonal
-        for (int i = 0; i <= size - WINNING_PATTERN_LENGTH; i++) {
-            for (int j = WINNING_PATTERN_LENGTH - 1; j < size; j++) {
+        for (int i = 0; i <= size - WIN_CONDITION; i++) {
+            for (int j = WIN_CONDITION - 1; j < size; j++) {
                 boolean diagonalWin = true;
-                for (int k = 0; k < WINNING_PATTERN_LENGTH; k++) {
+                for (int k = 0; k < WIN_CONDITION; k++) {
                     if (boardTemp[(i + k) * size + (j - k)] != player) {
                         diagonalWin = false;
                         break;
