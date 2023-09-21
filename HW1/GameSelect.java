@@ -2,28 +2,31 @@ import java.util.Scanner;
 
 public class GameSelect {
     public static int chooseGame() {
+        //prompt out welcome message and game menu.
         Scanner kb = new Scanner(System.in);
         int choice;
 
         welcomePrintOut();
-
         while (true) {
             if (kb.hasNextInt()) {
                 choice = kb.nextInt();
                 if (choice == 1 || choice == 2 || choice == 3) {
                     break;
                 } else {
+                    Board.clearScreen();
                     System.out.println("Invalid choice. Please select again.");
                     welcomePrintOut();
                 }
             }else{
+                Board.clearScreen();
                 System.out.println("Invalid choice. Please select again.");
                 welcomePrintOut();
                 kb.next();
             }
         }
 
-        return choice;
+        kb.close();
+        return choice; 
     }
 
     public static void welcomePrintOut(){

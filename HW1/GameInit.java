@@ -2,12 +2,16 @@ import java.util.Scanner;
 
 public class GameInit {
     public static void initGame(int choice) {
+        //initGame switch initalize the game base on user input.
         GameManager game;
         switch (choice) {
             case 1:
+                Board.clearScreen();
+                System.out.println("Welcome to Tic Tac Toe.");
                 game = new TicTacToe(new Board(getBoardSize()));
                 startGame(game);
             case 2:
+                System.out.println("Welcome to Order And Chaos");
                 game = new OrderAndChaos(new Board(getBoardSize()));
                 startGame(game);
             case 3:
@@ -19,6 +23,7 @@ public class GameInit {
     }
 
     private static int getBoardSize() {
+        //prompt to ask user for size of the board they want to game on.
         Scanner kb = new Scanner(System.in);
         int size;
         System.out.println("Enter the size of the board you want"
@@ -31,10 +36,12 @@ public class GameInit {
                 System.out.println("Invalid board size. Board size should be at least 3.");
             }
         }
+        kb.close();
         return size;
     }
 
     private static char playerSymbol() {
+        //prompt to ask user to choice which symobol they want to game with.
         Scanner kb = new Scanner(System.in);
         char symbol;
 
@@ -42,6 +49,7 @@ public class GameInit {
         while (true) {
             symbol = kb.next().charAt(0);
             if (symbol == 'X' || symbol == 'O') {
+                kb.close();
                 return symbol;
             } else {
                 System.out.println("Invalid choice, please enter again.");
@@ -50,6 +58,7 @@ public class GameInit {
     }
 
     private static void startGame(GameManager game) {
+        //check win for current player after each position input.
         char player = playerSymbol();
         Scanner kb = new Scanner(System.in);
         boolean end = false;
@@ -59,7 +68,7 @@ public class GameInit {
             int x = kb.nextInt();
             int y = kb.nextInt();
             if (game.makeMove(x, y, player)) {
-                clearScreen();
+                Board.clearScreen();
                 char win = game.checkWin();
                 if (win != ' ') {
                     game.printBoard();
@@ -78,10 +87,6 @@ public class GameInit {
                 }
             }
         }
-    }
-
-    private static void clearScreen(){
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
+        kb.close();
     }
 }

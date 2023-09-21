@@ -1,5 +1,5 @@
 public class TicTacToe extends GameManager {
-
+    //this is the class for Tic Tac Toe game logic 
     public TicTacToe(Board board) {
         super(board);
     }
@@ -7,8 +7,9 @@ public class TicTacToe extends GameManager {
     @Override
     public char checkWin() {
         char[] boardTemp = board.getBoard();
-        // Check rows and columns
+        //check rows and columns
         for (int i = 0; i < size; i++) {
+            //check rows
             if (boardTemp[i * size] != ' ') {
                 char rowSign = boardTemp[i * size];
                 boolean rowWin = true;
@@ -19,10 +20,10 @@ public class TicTacToe extends GameManager {
                     }
                 }
                 if (rowWin) {
-                    return rowSign; // Row win
+                    return rowSign;
                 }
             }
-
+            //check columns
             if (boardTemp[i] != ' ') {
                 char colSign = boardTemp[i];
                 boolean colWin = true;
@@ -33,12 +34,12 @@ public class TicTacToe extends GameManager {
                     }
                 }
                 if (colWin) {
-                    return colSign; // Column win
+                    return colSign;
                 }
             }
         }
 
-        // Check diagonals
+        //check diagonals
         if (boardTemp[0] != ' ' && boardTemp[0] == boardTemp[size * size - 1] 
                 && boardTemp[0] == boardTemp[size + 1]) {
             return boardTemp[0]; // Diagonal (top-left to bottom-right) win
@@ -48,6 +49,7 @@ public class TicTacToe extends GameManager {
             return boardTemp[size - 1]; // Diagonal (top-right to bottom-left) win
         }
 
-        return ' '; // No win yet
+        // No win yet
+        return ' ';
     }
 }

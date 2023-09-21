@@ -1,3 +1,4 @@
+/* 
 public class WinChecker {
     private int size;
     private Board board;
@@ -26,3 +27,5 @@ public class WinChecker {
 
     
 }
+
+*/
