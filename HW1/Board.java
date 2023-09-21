@@ -6,7 +6,7 @@ public class Board {
     public static Object clearTerminal;
     private char[] board;
     private int size;
-    private int totalPosition;
+    public int totalPosition;
 
     //create board with size that user given
     public Board(int size) {

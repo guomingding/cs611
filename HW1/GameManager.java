@@ -13,9 +13,12 @@ public abstract class GameManager {
         int position = row * size + col;
         if (row < 0 || row >= size || col < 0 || 
             col >= size || board.getBoard()[position] != ' ') {
+                Board.clearScreen();
+                System.out.println("Invalid move, please try again.");
             return false;
         }
         board.getBoard()[position] = player;
+        board.totalPosition--;
         return true;
     }
 

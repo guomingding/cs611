@@ -1,55 +1,87 @@
 public class TicTacToe extends GameManager {
-    //this is the class for Tic Tac Toe game logic 
     public TicTacToe(Board board) {
         super(board);
     }
-    
+
     @Override
     public char checkWin() {
         char[] boardTemp = board.getBoard();
-        //check rows and columns
+        // Check rows and columns
         for (int i = 0; i < size; i++) {
-            //check rows
-            if (boardTemp[i * size] != ' ') {
-                char rowSign = boardTemp[i * size];
-                boolean rowWin = true;
-                for (int j = 1; j < size; j++) {
-                    if (boardTemp[i * size + j] != rowSign) {
-                        rowWin = false;
-                        break;
-                    }
-                }
-                if (rowWin) {
-                    return rowSign;
-                }
+            // Check rows return when win
+            if (checkRow(boardTemp, i)) {
+                return boardTemp[i * size];
             }
-            //check columns
-            if (boardTemp[i] != ' ') {
-                char colSign = boardTemp[i];
-                boolean colWin = true;
-                for (int j = 1; j < size; j++) {
-                    if (boardTemp[j * size + i] != colSign) {
-                        colWin = false;
-                        break;
-                    }
-                }
-                if (colWin) {
-                    return colSign;
-                }
+
+            // Check columns return when win
+            if (checkColumn(boardTemp, i)) {
+                return boardTemp[i];
             }
         }
 
-        //check diagonals
-        if (boardTemp[0] != ' ' && boardTemp[0] == boardTemp[size * size - 1] 
-                && boardTemp[0] == boardTemp[size + 1]) {
+        // Check diagonals
+        if (checkDiagonal(boardTemp)) {
             return boardTemp[0]; // Diagonal (top-left to bottom-right) win
         }
-        if (boardTemp[size - 1] != ' ' && boardTemp[size - 1] == boardTemp[size * 2 - 2] 
-                && boardTemp[size - 1] == boardTemp[size * 3 - 3]) {
+        if (checkReverseDiagonal(boardTemp)) {
             return boardTemp[size - 1]; // Diagonal (top-right to bottom-left) win
         }
 
         // No win yet
         return ' ';
     }
+
+    private boolean checkRow(char[] boardTemp, int row) {
+        char currRow = boardTemp[row * size];
+        if (currRow == ' ') {
+            return false;
+        }
+        for (int col = 1; col < size; col++) {
+            if (boardTemp[row * size + col] != currRow) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkColumn(char[] boardTemp, int col) {
+        char currCol = boardTemp[col];
+        if (currCol == ' ') {
+            return false;
+        }
+        for (int row = 1; row < size; row++) {
+            if (boardTemp[row * size + col] != currCol) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkDiagonal(char[] boardTemp) {
+        char firstCell = boardTemp[0];
+        if (firstCell == ' ') {
+            return false; // The diagonal is empty, no win possible
+        }
+        for (int i = 1; i < size; i++) {
+            if (boardTemp[i * size + i] != firstCell) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkReverseDiagonal(char[] boardTemp) {
+        char firstCell = boardTemp[size - 1];
+        if (firstCell == ' ') {
+            return false; // The reverse diagonal is empty, no win possible
+        }
+        for (int i = 1; i < size; i++) {
+            if (boardTemp[i * size + (size - 1 - i)] != firstCell) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

@@ -24,8 +24,6 @@ public class GameSelect {
                 kb.next();
             }
         }
-
-        kb.close();
         return choice; 
     }
 
