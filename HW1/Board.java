@@ -1,4 +1,5 @@
 public class Board {
+    public static Object clearTerminal;
     private char[] board;
     private int size;
     private int totalPosition;
@@ -48,4 +49,6 @@ public class Board {
     public char[] getBoard(){
         return board;
     }
+
+
 }
