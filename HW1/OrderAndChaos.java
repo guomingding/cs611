@@ -1,4 +1,5 @@
 public class OrderAndChaos extends GameManager {
+    private int winCondition = 5; 
 
     public OrderAndChaos(Board board) {
         super(board);
@@ -7,74 +8,86 @@ public class OrderAndChaos extends GameManager {
     @Override
     public char checkWin() {
         char[] boardTemp = board.getBoard();
-
-        // Check for Order (O) win
-        if (checkPattern(boardTemp, 'O')) {
-            return 'O'; // Order (O) wins
-        }
-
-        // Check for Chaos (X) win
-        if (checkPattern(boardTemp, 'X')) {
-            return 'X'; // Chaos (X) wins
-        }
-
-        // Check for a draw
-        if (isBoardFull()) {
-            return 'D'; // It's a draw
-        }
-
-        return ' '; // No win or draw yet
-    }
-
-    private boolean checkPattern(char[] boardTemp, char player) {
-        // Check rows and columns for a winning pattern
-        for (int i = 0; i < size; i++) {
-            if (checkRow(boardTemp, player, i) || checkColumn(boardTemp, player, i)) {
-                return true;
+        for (int i = 0; i<size; i++){
+            if(checkRow(boardTemp, 'X', i) ||checkColumn(boardTemp, 'X', i)){
+                return 'X';
             }
         }
-
-        // Check diagonals for a winning pattern
-        return checkDiagonal(boardTemp, player);
+        if (checkDiagTopLeftBottomRight(boardTemp, 'X') || checkDiagTopRightBottomLeft(boardTemp, 'X')){
+            return 'X';
+        }
+        return ' ';
     }
-
+    
+    //check rows
     private boolean checkRow(char[] boardTemp, char player, int row) {
+        int count = 0;
+
         for (int col = 0; col < size; col++) {
-            if (boardTemp[row * size + col] != player) {
-                return false;
+            if (boardTemp[row * size + col] == player) {
+                count++;
+                if (count == winCondition) {
+                    return true;
+                }
+            } else {
+                count = 0;
             }
         }
-        return true;
+        return false;
     }
 
+    //check columns
     private boolean checkColumn(char[] boardTemp, char player, int col) {
+        int count = 0;
+
         for (int row = 0; row < size; row++) {
-            if (boardTemp[row * size + col] != player) {
-                return false;
+            if (boardTemp[row * size + col] == player) {
+                count++;
+                if (count == winCondition) {
+                    return true;
+                }
+            } else {
+                count = 0;
             }
         }
-        return true;
+        return false;
+    }
+    //check every diagonal from top left to bottom right
+    private boolean checkDiagTopLeftBottomRight(char[] boardTemp, char player) {
+        for (int i = 0; i <= size - winCondition; i++) {
+            for (int j = 0; j <= size - winCondition; j++) {
+                boolean diagonalWin = true;
+                for (int k = 0; k < winCondition; k++) {
+                    if (boardTemp[(i + k) * size + (j + k)] != player) {
+                        diagonalWin = false;
+                        break;
+                    }
+                }
+                if (diagonalWin) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    private boolean checkDiagonal(char[] boardTemp, char player) {
-        // Check top-left to bottom-right diagonal
-        boolean diagonal1 = true;
-        for (int i = 0; i < size; i++) {
-            if (boardTemp[i * size + i] != player) {
-                diagonal1 = false;
-                break;
+    //check every diagonal from top right to bottom left
+    private boolean checkDiagTopRightBottomLeft(char[] boardTemp, char player) {
+        for (int i = 0; i <= size - winCondition; i++) {
+            for (int j = winCondition - 1; j < size; j++) {
+                boolean diagonalWin = true;
+                for (int k = 0; k < winCondition; k++) {
+                    if (boardTemp[(i + k) * size + (j - k)] != player) {
+                        diagonalWin = false;
+                        break;
+                    }
+                }
+                if (diagonalWin) {
+                    return true;
+                }
             }
         }
-
-        // Check top-right to bottom-left diagonal
-        boolean diagonal2 = true;
-        for (int i = 0; i < size; i++) {
-            if (boardTemp[i * size + (size - 1 - i)] != player) {
-                diagonal2 = false;
-                break;
-            }
-        }
-
-        return diagonal1 || diagonal2;
+        return false;
     }
+
 }
