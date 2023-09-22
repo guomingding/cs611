@@ -1,11 +1,7 @@
-//import java.util.Scanner;
-
 public class GameSelect {
     public static int chooseGame() {
         //prompt out welcome message and game menu.
-        //Scanner kb = new Scanner(System.in);
         int choice;
-
         welcomePrintOut();
         while (true) {
             if (GameInit.kb.hasNextInt()) {
@@ -27,6 +23,7 @@ public class GameSelect {
         return choice; 
     }
 
+    //Game selection menu
     public static void welcomePrintOut(){
         System.out.println("Hi welcome, please choose the game you want to play:"
                 + "\n1. Tic Tac Toe"

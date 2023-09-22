@@ -1,5 +1,6 @@
 public class OrderAndChaos extends GameManager {
-    private static final int WIN_CONDITION = 5; // Define the winning pattern length
+    private int winCondition = 5; // Define the winning pattern length
+
     public OrderAndChaos(Board board) {
         super(board);
     }
@@ -7,75 +8,54 @@ public class OrderAndChaos extends GameManager {
     @Override
     public char checkWin() {
         char[] boardTemp = board.getBoard();
-
-        // Check for Order (O) win
-        if (checkPattern(boardTemp, 'O')) {
-            return 'O'; // Order (O) wins
-        }
-
-        // Check for Chaos (X) win
-        if (checkPattern(boardTemp, 'X')) {
-            return 'X'; // Chaos (X) wins
-        }
-
-        // Check for a draw
-        if (isBoardFull()) {
-            return 'D'; // It's a draw
-        }
-
-        return ' '; // No win or draw yet
-    }
-
-    private boolean checkPattern(char[] boardTemp, char player) {
-        // Check rows and columns for a winning pattern
-        for (int i = 0; i < size; i++) {
-            if (checkRow(boardTemp, player, i) || checkColumn(boardTemp, player, i)) {
-                return true;
+        for (int i = 0; i<size; i++){
+            if(checkRow(boardTemp, 'X', i) ||checkColumn(boardTemp, 'X', i)){
+                return 'X';
             }
         }
-
-        // Check diagonals for a winning pattern
-        return checkDiagonal(boardTemp, player);
+        if (checkDiagTopLeftBottomRight(boardTemp, 'X') || checkDiagTopRightBottomLeft(boardTemp, 'X')){
+            return 'X';
+        }
+        return ' ';
     }
-
+    
     private boolean checkRow(char[] boardTemp, char player, int row) {
-        int consecutiveCount = 0; // Count consecutive pieces
+        int count = 0;
 
         for (int col = 0; col < size; col++) {
             if (boardTemp[row * size + col] == player) {
-                consecutiveCount++;
-                if (consecutiveCount == WIN_CONDITION) {
+                count++;
+                if (count == winCondition) {
                     return true;
                 }
             } else {
-                consecutiveCount = 0; // Reset the count if not consecutive
+                count = 0;
             }
         }
         return false;
     }
 
     private boolean checkColumn(char[] boardTemp, char player, int col) {
-        int consecutiveCount = 0; // Count consecutive pieces
+        int count = 0;
 
         for (int row = 0; row < size; row++) {
             if (boardTemp[row * size + col] == player) {
-                consecutiveCount++;
-                if (consecutiveCount == WIN_CONDITION) {
+                count++;
+                if (count == winCondition) {
                     return true;
                 }
             } else {
-                consecutiveCount = 0; // Reset the count if not consecutive
+                count = 0;
             }
         }
         return false;
     }
-
-    private boolean checkDiagonal(char[] boardTemp, char player) {
-        // Check top-left to bottom-right diagonal
-        for (int i = 0; i <= size - WIN_CONDITION; i++) {
-            for (int j = 0; j <= size - WIN_CONDITION; j++) {
+    //check diagonal from top left to bottom right
+    private boolean checkDiagTopLeftBottomRight(char[] boardTemp, char player) {
+        for (int i = 0; i <= size - winCondition; i++) {
+            for (int j = 0; j <= size - winCondition; j++) {
                 boolean diagonalWin = true;
-                for (int k = 0; k < WIN_CONDITION; k++) {
+                for (int k = 0; k < winCondition; k++) {
                     if (boardTemp[(i + k) * size + (j + k)] != player) {
                         diagonalWin = false;
                         break;
@@ -86,12 +66,15 @@ public class OrderAndChaos extends GameManager {
                 }
             }
         }
+        return false;
+    }
 
-        // Check top-right to bottom-left diagonal
-        for (int i = 0; i <= size - WIN_CONDITION; i++) {
-            for (int j = WIN_CONDITION - 1; j < size; j++) {
+    //check diagonal from top right to bottom left
+    private boolean checkDiagTopRightBottomLeft(char[] boardTemp, char player) {
+        for (int i = 0; i <= size - winCondition; i++) {
+            for (int j = winCondition - 1; j < size; j++) {
                 boolean diagonalWin = true;
-                for (int k = 0; k < WIN_CONDITION; k++) {
+                for (int k = 0; k < winCondition; k++) {
                     if (boardTemp[(i + k) * size + (j - k)] != player) {
                         diagonalWin = false;
                         break;
@@ -104,4 +87,5 @@ public class OrderAndChaos extends GameManager {
         }
         return false;
     }
+
 }

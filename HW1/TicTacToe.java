@@ -59,7 +59,7 @@ public class TicTacToe extends GameManager {
     private boolean checkDiagTopLeftBottomRight(char[] boardTemp) {
         char currCell = boardTemp[0];
         if (currCell == ' ') {
-            return false; // The diagonal is empty, no win possible
+            return false;
         }
         for (int i = 1; i < size; i++) {
             if (boardTemp[i * size + i] != currCell) {
@@ -72,7 +72,7 @@ public class TicTacToe extends GameManager {
     private boolean checkDiagTopRightBottomLeft(char[] boardTemp) {
         char currCell = boardTemp[size - 1];
         if (currCell == ' ') {
-            return false; // The reverse diagonal is empty, no win possible
+            return false;
         }
         for (int i = 1; i < size; i++) {
             if (boardTemp[i * size + (size - 1 - i)] != currCell) {

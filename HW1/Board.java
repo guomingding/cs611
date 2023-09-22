@@ -15,7 +15,7 @@ public class Board {
         this.totalPosition = size * size;
         createBoard();
     }
-
+    
     //create new board
     private void createBoard() {
         for (int i = 0; i < size*size; i++) {

@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class GameInit {
     static Scanner kb = new Scanner(System.in);
-
     public static void initGame(int choice) {
         // initGame switch initalize the game base on user input.
         GameManager game;
@@ -28,10 +27,12 @@ public class GameInit {
                 return;
         }
     }
-
+    
     private static int getBoardSize() {
-        // prompt to ask user for size of the board they want to game on.
-        //Scanner kb = new Scanner(System.in);
+        /* 
+        Prompt to ask user for size of the board they want to game on.
+        Only check for int value currently, will prompt error if input is str or char
+        */
         int size;
         System.out.println("Enter the size of the board you want"
                 + "to play on, for example 3 for 3x3 board:");
@@ -48,7 +49,6 @@ public class GameInit {
 
     private static char playerSymbol() {
         // prompt to ask user to choice which symobol they want to game with.
-        //Scanner kb = new Scanner(System.in);
         char symbol;
         System.out.println("Please select which symbol you want to play with 'X' or 'O'");
         while (true) {
@@ -65,8 +65,7 @@ public class GameInit {
     }
 
     private static void startGame(GameManager gameManger, char player) {
-        // check win for current player after each position input.
-        //Scanner kb = new Scanner(System.in);
+        // check win for current player after each time valid position input.
         boolean end = false;
 
         while (!end) {
