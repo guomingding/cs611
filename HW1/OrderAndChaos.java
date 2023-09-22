@@ -1,5 +1,5 @@
 public class OrderAndChaos extends GameManager {
-    private int winCondition = 5; // Define the winning pattern length
+    private int winCondition = 5; 
 
     public OrderAndChaos(Board board) {
         super(board);
@@ -19,6 +19,7 @@ public class OrderAndChaos extends GameManager {
         return ' ';
     }
     
+    //check rows
     private boolean checkRow(char[] boardTemp, char player, int row) {
         int count = 0;
 
@@ -35,6 +36,7 @@ public class OrderAndChaos extends GameManager {
         return false;
     }
 
+    //check columns
     private boolean checkColumn(char[] boardTemp, char player, int col) {
         int count = 0;
 
@@ -50,7 +52,7 @@ public class OrderAndChaos extends GameManager {
         }
         return false;
     }
-    //check diagonal from top left to bottom right
+    //check every diagonal from top left to bottom right
     private boolean checkDiagTopLeftBottomRight(char[] boardTemp, char player) {
         for (int i = 0; i <= size - winCondition; i++) {
             for (int j = 0; j <= size - winCondition; j++) {
@@ -69,7 +71,7 @@ public class OrderAndChaos extends GameManager {
         return false;
     }
 
-    //check diagonal from top right to bottom left
+    //check every diagonal from top right to bottom left
     private boolean checkDiagTopRightBottomLeft(char[] boardTemp, char player) {
         for (int i = 0; i <= size - winCondition; i++) {
             for (int j = winCondition - 1; j < size; j++) {

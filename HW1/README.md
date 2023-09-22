@@ -8,165 +8,293 @@ Student ID  U84055774
 ## Files
 ---------------------------------------------------------------------------
 
-Board.java -- This class ...
-GameInit.java
-GameManager.java
-GameSelect.java
-OrderAndChaos.java
-play.java
-TicTacToe.java
+Board.java -- This is the class to create all the "graphics" in the terminal. 
+                It has function for initiate new board with the size determin
+                by the user, and it has function to print out the board and clear
+                the "screen".
 
+GameInit.java -- This is class to has initate the game, which include asking 
+                    user input for which game they want to play. Getting the 
+                    board size they want their TicTacToe be. Symbol they want to play.
+                    For game choice, if user choice 2(Order and Chaos), they will
+                    be assign as 'X' and the board size is 6 with winning condition of 5.
+
+GameManager.java -- This this an abstract class for board game like tictactoc
+                    and order and chaos. It contains helper method such as 
+                    isBoardFull and printBoard. And makeMove to fill in the
+                    cordinate position player choose.
+                    
+GameSelect.java -- This class use to take in user input for the scanner (kb). And it 
+                    also print out the game menu.
+
+OrderAndChaos.java -- This is the game logic for Order And Chaos. 
+                        The win condition for this game is 5 for player with 
+                        symbol 'X'. Player 'O' will win when there is no more 
+                        space for 'X' to fill in/the board is full.
+
+TicTacToe.java -- This is the game logic for Tic Tac Toe. It has function to check rows, 
+                    columns, both diagonals to see if any player has meet the winning condition.
+                    The winning condition of Tic Tac Toe is the size of the board, e.g. if size of baord is 4, winning condition is 4.
+
+Play.java -- This is the main class, it use to play the game.
 
 ## Notes
 ---------------------------------------------------------------------------
-Please explain the cool features of your program. Anything that you feel like you did a good job at or were creative about, explain it in bullets here. Additionally, any design decisions should be made here.
+1. Eveytime player input a move into the board, terminal will clear out 
+        to make the game esay to see.
 
-Example.
-1. I woke up this morning and chose to wear green pants because they look nice
-2. Map can be extended to 3-D
-3. Game can determine that the game is a tie before the end of all moves are taken.
-4. Etc.
 
 ## How to compile and run
 ---------------------------------------------------------------------------
-Your directions on how to run the code. Ideally should resemble the lines below
-
-1. Navigate to the directory "YourCodeDirectory" after unzipping the files
-2. Run the following instructions:
-javac *.java -d bin
-java -cp ./bin Main
+Game was run under java 1.8.0_202, in vscode. Game can be run in the followwing method:
+1. Unzip the file.
+2. cd into the derectory where all the .java files are
+3. Run the following command line in terminal:
+    javac *.java
+    java Play
+4. Game menu should prompt out if no error occur.
 
 ## Input/Output Example
 ---------------------------------------------------------------------------
 Please give us a full execution of what we should see on the screen. Label each text with input and output. For example:
 
 Output:
-[+] Hello there! Let's play a game!
-[+] Enter a number for the following options:
-[+] 1. Tic Tac Toe
-[+] 2. Connect Four
-[+] 3. Order and Chaos: 
+Hi welcome, please choose the game you want to play:
+1. Tic Tac Toe
+2. Order and Chaos
+3. Exit
 Input:
 1
 Output:
-[+] Welcome to Tic Tac Toe!
-[+] Enter the number of teams: 
-Input:
-2
-Output:
-[+] Team 1 , please enter your team name: 
-Input:
-East
-Output:
-[+] Enter the number of players for team East: 
-Input:
-2
-Output:
-[+] Team 1 , please enter your team color: 
-Input:
-Red
-Output:
-[+] Team East, Player 1 , please enter your name: 
-Input:
-Biggie
-Output:
-[+] Team East, Player 1 , please enter your symbol: 
-Input:
-X
-Output:
-[+] Team East, Player 2 , please enter your name: 
-Input:
-Nas
-Output:
-[+] Team East, Player 2 , please enter your symbol: 
-Input:
-O
-Output:
-[+] Team 2 , please enter your team name: 
-Input:
-West
-Output:
-[+] Enter the number of players for team West: 
-Input:
-1  
-Output:
-[+] Team 2 , please enter your team color: 
-Input:
-Blue
-Output:
-[+] Team West, Player 1 , please enter your name: 
-Input:
-Pac
-Output:
-[+] Team West, Player 1 , please enter your symbol: 
-Input:
-X
-Output:
-[+] Would you like to change the board size? (y/n):
-Input:
-Y
-Output:
-[+] Enter the number of columns for the board: 
+Welcome to Tic Tac Toe.
+Enter the size of the board you wantto play on, for example 3 for 3x3 board:
 Input:
 4
 Output:
-[+] Enter the number of rows for the board: 
+4
+Please select which symbol you want to play with 'X' or 'O'
 Input:
-3
+O
 Output:
-[+] Would you like to change number of symbols in a row to win? (y/n): 
+ | | | 
+- - - -
+ | | | 
+- - - -
+ | | | 
+- - - -
+ | | | 
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
 Input:
-N
+0 2
 Output:
-+---------------+---------------+---------------+---------------+
-|         1         |         2         |         3        |       4       |
-+---------------+---------------+---------------+---------------+
-|         5         |         6         |         7        |       8       |
-+---------------+---------------+---------------+---------------+
-|         9         |         10       |         11      |       12      |
-+---------------+---------------+---------------+---------------+
-[+] Biggie, it's your turn! Please enter a valid position: 
+Player O select (0,2)
+ | |O| 
+- - - -
+ | | | 
+- - - -
+ | | | 
+- - - -
+ | | | 
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
 Input:
-1
-+---------------+---------------+---------------+---------------+
-|         X         |         2       |         3         |         4         |
-+---------------+---------------+---------------+---------------+
-|         5         |         6        |         7        |         8         |
-+---------------+---------------+---------------+---------------+
-|         9         |        10       |        11       |         12        |
-+---------------+---------------+---------------+---------------+
-[Omitted because Kevin is Lazy]
+0 1
 Output:
-TEAM: East, PLAYER: Biggie played X's.
-WINS: 1
-LOSSES: 0
-GAMES PLAYED: 1
-
-TEAM: East, PLAYER: Nas played O's.
-WINS: 1
-LOSSES: 0
-GAMES PLAYED: 1
-
-TEAM: West, PLAYER: Pac played X's.
-WINS: 0
-LOSSES: 1
-GAMES PLAYED: 1
-
-[+] Would you like to play again? (y/n):
+Player X select (0,1)
+ |X|O| 
+- - - -
+ | | | 
+- - - -
+ | | | 
+- - - -
+ | | | 
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
 Input:
-N
+0 2
 Output:
-[+] Would you like to play a different game? (y/n):
+Invalid move, please try again.
+ |X|O| 
+- - - -
+ | | | 
+- - - -
+ | | | 
+- - - -
+ | | | 
 Input:
-Y
+0 4
 Output:
-[+] Hello there! Let's play a game!
-[+] Enter a number for the following options:
-[+] 1. Tic Tac Toe
-[+] 2. Connect Four
-[+] 3. Order and Chaos:
+Invalid move, please try again.
+ |X|O| 
+- - - -
+ | | | 
+- - - -
+ | | | 
+- - - -
+ | | | 
 Input:
-Quit
+3 3
 Output:
-[+] Goodbye!
-
+Player O select (3,3)
+ |X|O| 
+- - - -
+ | | | 
+- - - -
+ | | | 
+- - - -
+ | | |O
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+2 2
+Output:
+Player X select (2,2)
+ |X|O| 
+- - - -
+ | | | 
+- - - -
+ | |X| 
+- - - -
+ | | |O
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+2 3
+Output:
+Player O select (2,3)
+ |X|O| 
+- - - -
+ | | | 
+- - - -
+ | |X|O
+- - - -
+ | | |O
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+1 3
+Output:
+Player X select (1,3)
+ |X|O| 
+- - - -
+ | | |X
+- - - -
+ | |X|O
+- - - -
+ | | |O
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+1 1
+Output:
+Player O select (1,1)
+ |X|O| 
+- - - -
+ |O| |X
+- - - -
+ | |X|O
+- - - -
+ | | |O
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+0 0
+Output:
+Player X select (0,0)
+X|X|O| 
+- - - -
+ |O| |X
+- - - -
+ | |X|O
+- - - -
+ | | |O
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+1 0
+Output:
+Player O select (1,0)
+X|X|O| 
+- - - -
+O|O| |X
+- - - -
+ | |X|O
+- - - -
+ | | |O
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+2 0
+Output:
+Player X select (2,0)
+X|X|O| 
+- - - -
+O|O| |X
+- - - -
+X| |X|O
+- - - -
+ | | |O
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+3 0
+Output:
+Player O select (3,0)
+X|X|O| 
+- - - -
+O|O| |X
+- - - -
+X| |X|O
+- - - -
+O| | |O
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+1 2
+Output:
+Player X select (1,2)
+X|X|O| 
+- - - -
+O|O|X|X
+- - - -
+X| |X|O
+- - - -
+O| | |O
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+0 3
+Output:
+Player O select (0,3)
+X|X|O|O
+- - - -
+O|O|X|X
+- - - -
+X| |X|O
+- - - -
+O| | |O
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+3 2
+Output:
+Player X select (3,2)
+X|X|O|O
+- - - -
+O|O|X|X
+- - - -
+X| |X|O
+- - - -
+O| |X|O
+Player O please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+3 1
+Output:
+Player O select (3,1)
+X|X|O|O
+- - - -
+O|O|X|X
+- - - -
+X| |X|O
+- - - -
+O|O|X|O
+Player X please enter the your move. For example: 0 1 for 1st row 2nd column:
+Input:
+2 1
+Output:
+Player X select (2,1)
+X|X|O|O
+- - - -
+O|O|X|X
+- - - -
+X|X|X|O
+- - - -
+O|O|X|O
+Draw!

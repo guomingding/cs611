@@ -56,6 +56,7 @@ public class TicTacToe extends GameManager {
         return true;
     }
 
+    
     private boolean checkDiagTopLeftBottomRight(char[] boardTemp) {
         char currCell = boardTemp[0];
         if (currCell == ' ') {
